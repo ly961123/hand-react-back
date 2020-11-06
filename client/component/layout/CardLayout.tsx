@@ -13,7 +13,9 @@ function CardLayout({ header, children }: IProps) {
     <div className='card_layout'>
       {header}
       <div className='card_layout__content'>
-        <Card>{children}</Card>
+        <div className='card_layout__card'>
+          <Card>{children}</Card>
+        </div>
       </div>
     </div>
   );
