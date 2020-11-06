@@ -1,0 +1,87 @@
+#components-layout-demo-custom-trigger, .trigger {
+  font-size: 18px;
+  line-height: 50px;
+  padding: 0 24px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  transition: color 0.3s;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #f2f2f2;
+}
+
+#components-layout-demo-custom-trigger, .trigger:hover {
+  color: #1890ff;
+  height: 50px;
+  padding: 0;
+}
+
+#components-layout-demo-custom-trigger, .site-layout-header {
+  background-color: #262f3e;
+  display: flex;
+  justify-content: space-between;
+}
+
+#components-layout-demo-custom-trigger, .logo {
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  color: white;
+  width: 200px;
+  text-align: center;
+}
+
+#components-layout-demo-custom-trigger, .avatar {
+  // padding-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 18px;
+}
+
+.site-layout .site-layout-background {
+  background-color: #fff;
+}
+
+.site-layout .site-layout-content {
+  background-color: #f2f2f2;
+}
+
+.site-layout .ant-menu .ant-menu-light .ant-menu-root .ant-menu-inline {
+  background-color: #f2f2f2;
+}
+
+.card_layout {
+  &__header {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    color: #000;
+    background: #fff;
+    h1 {
+      font-weight: 800;
+    }
+  }
+
+  &__icon {
+    color: #006eff;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  &__icon:hover {
+    color: #006eff;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #ccc;
+  }
+
+  &__content {
+    padding: 20px;
+  }
+}

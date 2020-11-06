@@ -1,0 +1,26 @@
+[
+  {
+    "content": "商户管理",
+    "url": "/merchants",
+    "icon": "merchants",
+    "children":[
+      {
+        "content": "商户列表",
+        "url": "/merchants/list",
+        "icon": "merchantList"
+      }
+    ]
+  },
+  {
+    "content": "需求管理",
+    "url": "/requirements",
+    "icon": "requirements",
+    "children":[
+      {
+        "content": "需求列表",
+        "url": "/requirements/list",
+        "icon": "requirementList"
+      }
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"],
+    "target": "es6",
+    "sourceMap": true,
+    "rootDir": "."
+  },
+  "include": [
+    "client",
+  ],
+  "exclude": [
+    "node_modules",
+    "portal",
+    "test",
+  ]
+}
