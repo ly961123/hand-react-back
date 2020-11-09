@@ -53,7 +53,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
   }, []);
 
   const handleEditClick = React.useCallback(e => {
-    const mchId = e.target.getAttribute('data-mchId');
+    const mchId = e.target.getAttribute('data-mchid');
     console.log(mchId, 'mchId');
     return;
     history.push(`/indicator/manager/edit?id=${mchId}`);
@@ -92,7 +92,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
       key: 'mchId',
       render(mchId: number): ReactNode {
         return <div>
-          <a onClick={handleEditClick} data-mchId={mchId}>编辑</a>
+          <a onClick={handleEditClick} data-mchid={mchId}>编辑</a>
         </div>;
       },
     },

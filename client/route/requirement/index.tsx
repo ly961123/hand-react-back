@@ -6,8 +6,8 @@ import Detail from '../../container/requirement/detail';
 
 export default ({ match }: RouteComponentProps) => (
   <Switch>
-    <Route exact path={`${match.url}/list`} component={RequirementList} />
+    <Route exact path={`${match.url}`} component={RequirementList} />
     <Route path={`${match.url}/:requireId`} component={Detail} />
-    <Redirect from='*' to={'/merchants'} />
+    <Redirect from='*' to={match.url} />
   </Switch>
 );

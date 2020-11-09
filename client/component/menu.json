@@ -6,7 +6,7 @@
     "children":[
       {
         "content": "商户列表",
-        "url": "/merchants/list",
+        "url": "/merchants",
         "icon": "merchantList"
       }
     ]
@@ -18,7 +18,7 @@
     "children":[
       {
         "content": "需求列表",
-        "url": "/requirements/list",
+        "url": "/requirements",
         "icon": "requirementList"
       }
     ]

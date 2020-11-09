@@ -5,7 +5,7 @@ import Home from '../../container/merchant'
 
 export default ({ match }: RouteComponentProps) => (
   <Switch>
-    <Route exact path={`${match.url}/list`} component={Home} />
+    <Route exact path={match.url} component={Home} />
     {/* <Route path={`${match.url}/create`} component={CreateMerchant} /> */}
     <Redirect from='*' to={match.url} />
   </Switch>

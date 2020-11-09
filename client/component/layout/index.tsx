@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Avatar } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import {
@@ -36,9 +36,11 @@ const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 const SiderDemo = ({ history, children, location }: RouteComponentProps & Props) => {
-  console.log(history, location ,66666);
-  console.log(menuDate, 'menuDate');
+  console.log(history, 'historyhistoryhistoryhistory');
+  console.log(location, 'locationlocationlocationlocation');
   const [collapsed, setCollapsed] = useState(false);
+  const [openKeys, setOpenKeys] = useState<string[]>();
+  const [selectedKeys, setSelectedKeys] = useState<string[]>();
 
   const toggle = () => {
     setCollapsed(!collapsed);
@@ -70,8 +72,13 @@ const SiderDemo = ({ history, children, location }: RouteComponentProps & Props)
       }
     });
     return menuItem;
-  }
-  console.log(location, 'location');
+  };
+
+  useEffect(() => {
+    setSelectedKeys(location.pathname === '/' ? ['/merchants'] : [location.pathname]);
+    setOpenKeys(location.pathname === '/' ? ['/merchants'] : [`/${location.pathname.split('/')[1]}`]);
+  }, []);
+
   return (
     <Layout style={{height:'100%'}}>
       <Header className='site-layout-header' style={{ padding: 0, height: '50px' }}>
@@ -82,7 +89,13 @@ const SiderDemo = ({ history, children, location }: RouteComponentProps & Props)
       </Header>
       <Layout className='site-layout'>
         <Sider collapsed={collapsed} width={200} className='site-layout-background'>
-          <Menu mode='inline' defaultSelectedKeys={[location.pathname]} defaultOpenKeys={[`/${location.pathname.split('/')[1]}`]}>
+          <Menu
+            mode='inline'
+            onOpenChange={(e: any) => setOpenKeys(e)}
+            openKeys={openKeys}
+            onClick={(e: any) => setSelectedKeys([e.key])}
+            selectedKeys={selectedKeys}
+          >
             {setMenu(menuDate)}
           </Menu>
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
