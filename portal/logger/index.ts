@@ -10,7 +10,7 @@ const getLoggerFileName = (name: string) => {
 
 const logger = () => {
   const { combine, timestamp, label, printf } = format;
-  const logFormat = printf(({ level, message, label: formatLabel }) => `${moment().format('YYYY-MM-DD HH:mm:ss')} [${formatLabel}] ${level}: ${message}`);
+  const logFormat = printf(({ level, label: formatLabel, message }) => `${moment().format('YYYY-MM-DD HH:mm:ss')} [${formatLabel}] ${level}: ${message}`);
 
   const transportList = [
     new transports.Console(),

@@ -7,7 +7,7 @@ import React, {
   ReactNode,
 } from 'react';
 import { GlobalState } from '../application';
-import { Button, Row, Col, Form, Input, Select, DatePicker, Table, Spin } from 'antd';
+import { Button, Row, Col, Form, Input, Select, DatePicker, Table, Spin, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { RouteComponentProps } from 'react-router-dom';
 import CardLayout from '../../component/layout/CardLayout';
@@ -29,7 +29,6 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
   const [merchantList, setMerchantList] = useState<MerchantData>(defultData);
   const [loading, setLoading] = useState(false);
   console.log(hideMenu, setHideMenu);
-  console.log(merchantList, 'merchantList');
 
   const fetchList = async () => {
     const result: IMerchantList = await apiClient.get(`merchant/list`);
@@ -39,12 +38,11 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
   const getList = useCallback(() => {
     setLoading(true);
     fetchList().then((res: IMerchantList) => {
-      console.log(res, 'resresres');
       setMerchantList(res.data);
       setLoading(false);
-    }).catch(err => {
+    }).catch(() => {
       setLoading(false);
-      console.log(err, '出错了');
+      message.error('获取列表错误')
     })
   }, [fetchList, apiClient]);
 
@@ -54,9 +52,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
 
   const handleEditClick = React.useCallback(e => {
     const mchId = e.target.getAttribute('data-mchid');
-    console.log(mchId, 'mchId');
-    return;
-    history.push(`/indicator/manager/edit?id=${mchId}`);
+    history.push(`/merchants/${mchId}/edit`);
   }, [history]);
 
   const columns = [
@@ -110,9 +106,6 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
         console.log(startTime, 'startTime');
         console.log(endTime, 'endTime');
         console.log(values, 'values1111');
-      })
-      .catch(info => {
-        console.log('Validate Failed:', info);
       });
   }, []);
 
@@ -124,11 +117,10 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
           // showBackButton
           title='商户列表'
           operation={
-            true
-            && <Button
+            <Button
               type='primary'
               onClick={() => {
-                // history.push(`${merchantsPath}/${query.merchantId}/create`);
+                history.push('/merchants/create');
               }}
             >
               新建商户
@@ -182,7 +174,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
           dataSource={merchantList.merchants}
           bordered
           size='small'
-          />
+        />
       </Spin>
     </CardLayout>
   )

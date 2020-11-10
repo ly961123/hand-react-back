@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Layout, Menu, Avatar } from 'antd';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import {
@@ -38,6 +38,7 @@ const { SubMenu } = Menu;
 const SiderDemo = ({ history, children, location }: RouteComponentProps & Props) => {
   console.log(history, 'historyhistoryhistoryhistory');
   console.log(location, 'locationlocationlocationlocation');
+  const setOpenkey = useRef<boolean>(true);
   const [collapsed, setCollapsed] = useState(false);
   const [openKeys, setOpenKeys] = useState<string[]>();
   const [selectedKeys, setSelectedKeys] = useState<string[]>();
@@ -76,8 +77,11 @@ const SiderDemo = ({ history, children, location }: RouteComponentProps & Props)
 
   useEffect(() => {
     setSelectedKeys(location.pathname === '/' ? ['/merchants'] : [location.pathname]);
-    setOpenKeys(location.pathname === '/' ? ['/merchants'] : [`/${location.pathname.split('/')[1]}`]);
-  }, []);
+    if (setOpenkey.current) {
+      setOpenKeys(location.pathname === '/' ? ['/merchants'] : [`/${location.pathname.split('/')[1]}`]);
+      setOpenkey.current = !setOpenkey.current;
+    }
+  }, [location]);
 
   return (
     <Layout style={{height:'100%'}}>

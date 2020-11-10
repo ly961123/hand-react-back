@@ -32,7 +32,7 @@ export default async (ctx: any, next: () => void) => {
   const { sn } = ctx;
   const requestBody = JSON.stringify(context.request.body);
   const query = JSON.stringify(context.request.query);
-  logger().info(`[sn: ${sn}] ${query} ${requestBody} ${context}`);
+  logger().info(`[sn: ${sn}] query: ${query} requestBody: ${requestBody} ${context}`);
 
   ctx.sendSuccessResponse = sendSuccessResponse.bind(context);
   ctx.sendErrorResponse = sendErrorResponse.bind(context);
