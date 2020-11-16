@@ -30,10 +30,10 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
   const [loading, setLoading] = useState(false);
   console.log(hideMenu, setHideMenu);
 
-  const fetchList = async () => {
+  const fetchList = useCallback(async () => {
     const result: IMerchantList = await apiClient.get(`merchant/list`);
     return result;
-  };
+  }, []);
 
   const getList = useCallback(() => {
     setLoading(true);
@@ -44,11 +44,11 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
       setLoading(false);
       message.error('获取列表错误')
     })
-  }, [fetchList, apiClient]);
+  }, [fetchList]);
 
   useEffect(() => {
     getList();
-  }, []);
+  }, [getList]);
 
   const handleEditClick = React.useCallback(e => {
     const mchId = e.target.getAttribute('data-mchid');
@@ -107,7 +107,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
         console.log(endTime, 'endTime');
         console.log(values, 'values1111');
       });
-  }, []);
+  }, [form]);
 
   return (
     <CardLayout

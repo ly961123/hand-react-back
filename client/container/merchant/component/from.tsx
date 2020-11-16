@@ -68,7 +68,7 @@ const MerchantFrom = memo(({
       setFormData(data);
       form.setFieldsValue(data);
     }
-  }, [merchant]);
+  }, [form, merchant]);
 
   const fetchData = async (url: string, values: List) => {
     const result: IMerchantList = await apiClient.post(url, values);
@@ -93,7 +93,7 @@ const MerchantFrom = memo(({
       setLoading(false);
       message.error(`${tip}失败`);
     })
-  }, [fetchData, apiClient]);
+  }, [history]);
 
   const submit = useCallback(fetch => {
     form
@@ -101,7 +101,7 @@ const MerchantFrom = memo(({
       .then(values => {
         fetch(values);
       });
-  }, []);
+  }, [form]);
 
   const setFormField = (key: string, value: any) => {
     const data = {

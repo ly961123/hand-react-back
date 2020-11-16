@@ -59,6 +59,13 @@ module.exports = {
     'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
     // 此规则强制在 JSX 属性中一致使用双引号或单引号
     'jsx-quotes': ['error', 'prefer-single'],
+
+    // 对于react hooks刚开始使用的开发者，使用hooks特性eslint提示，为了保证不误用，官方建议装上eslint-plugin-react-hooks
+    // npm install eslint-plugin-react-hooks
+    // 在eslint文件加上这两rule
+    // useEffect依赖提示
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
     indent: [
       'warn',
       2,
