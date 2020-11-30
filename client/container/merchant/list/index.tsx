@@ -6,14 +6,15 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react';
-import { GlobalState } from '../application';
-import { Button, Row, Col, Form, Input, Select, DatePicker, Table, Spin, message } from 'antd';
+import { GlobalState } from '../../application';
+import { Button, Row, Col, Form, Input, Select, DatePicker, Table, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { RouteComponentProps } from 'react-router-dom';
-import CardLayout from '../../component/layout/CardLayout';
-import CardHeader from '../../component/layout/CardHeader';
+import CardLayout from '../../../component/layout/CardLayout';
+import CardHeader from '../../../component/layout/CardHeader';
 import { TypeList, IMerchantList, MerchantData } from '@rootDir/model/merchant';
 import apiClient from '@rootDir/client/apiClient';
+import Spins from '@rootDir/client/component/Spins';
 import moment from 'moment';
 
 const { Option } = Select;
@@ -23,7 +24,7 @@ const defultData = {
   merchants: [],
 };
 
-const FillScheme = memo(({ history }: RouteComponentProps) => {
+const Merchant = memo(({ history }: RouteComponentProps) => {
   const [form] = Form.useForm();
   const { hideMenu, setHideMenu } = useContext(GlobalState);
   const [merchantList, setMerchantList] = useState<MerchantData>(defultData);
@@ -42,7 +43,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
       setLoading(false);
     }).catch(() => {
       setLoading(false);
-      message.error('获取列表错误')
+      message.error('获取列表错误');
     })
   }, [fetchList]);
 
@@ -129,7 +130,7 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
         />
       }
     >
-      <Spin spinning={loading}>
+      <Spins spinning={loading}>
         <Form form={form}>
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col span={6}>
@@ -175,9 +176,9 @@ const FillScheme = memo(({ history }: RouteComponentProps) => {
           bordered
           size='small'
         />
-      </Spin>
+      </Spins>
     </CardLayout>
   )
 })
 
-export default FillScheme;
+export default Merchant;

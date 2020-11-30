@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import Merchant from '../../container/merchant';
+import Merchant from '../../container/merchant/list';
 import Create from '../../container/merchant/create';
 import Edit from '../../container/merchant/edit';
 

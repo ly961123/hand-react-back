@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import {
   Button,
-  Spin,
   Form,
   Input,
   Col,
@@ -20,6 +19,7 @@ import CardLayout from '../../../component/layout/CardLayout';
 import CardHeader from '../../../component/layout/CardHeader';
 import { IMerchantList, TypeList, ChannelList, List } from '@rootDir/model/merchant';
 import apiClient from '@rootDir/client/apiClient';
+import Spins from '@rootDir/client/component/Spins';
 
 type IProps = {
   merchant?: List,
@@ -122,7 +122,7 @@ const MerchantFrom = memo(({
         />
       }
     >
-      <Spin spinning={loading}>
+      <Spins spinning={loading}>
         <Form form={form} {...formItemLayout}>
           <Form.Item
             label='商户名'
@@ -240,7 +240,7 @@ const MerchantFrom = memo(({
             取消
           </Button>
         </Card>
-      </Spin>
+      </Spins>
     </CardLayout>
   )
 })

@@ -1,0 +1,98 @@
+.require-list .tag {
+  box-sizing: border-box;
+  margin: 0;
+  color: #006eff;
+  list-style: none;
+  display: inline-block;
+  height: 22px;
+  // width: 80px;
+  margin-right: 8px;
+  padding: 0 7px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  white-space: nowrap;
+  background: #fafafa;
+  border: 1px solid #006eff;
+}
+/* '0': '新需求','1': '已启动','2': '生产中','3': '已完成','4': '结算中','5': '已结算','6': '已关闭', */
+
+.require-list .tag-0 {
+  color: #e54545;
+  border: 1px solid #e54545;
+}
+
+.require-list .tag-1 {
+  color: #006eff;
+  border: 1px solid #006eff;
+}
+
+.require-list .tag-2 {
+  color: #08fd08;
+  border: 1px solid #08fd08;
+}
+
+.require-list .tag-3 {
+  color: #0abf5b;
+  border: 1px solid #0abf5b;
+}
+
+.require-list .tag-4 {
+  color: #ff9d00;
+  border: 1px solid #ff9d00;
+}
+
+.require-list .tag-5 {
+  color: #888;
+  border: 1px solid #888;
+}
+
+.require-list .tag-6 {
+  color: #bbb;
+  border: 1px solid #bbb;
+}
+
+.require-list .tag-7 {
+  color: rgb(208, 61, 221);
+  border: 1px solid rgb(208, 61, 221);
+}
+
+.require-list .tag-8 {
+  color: rgb(221, 61, 154);
+  border: 1px solid rgb(221, 61, 154);
+}
+
+.require-list .tag-9 {
+  color: rgb(149, 61, 221);
+  border: 1px solid rgb(149, 61, 221);
+}
+
+.require-list .tag-10 {
+  color: rgb(64, 61, 221);
+  border: 1px solid rgb(64, 61, 221);
+}
+
+.require-list .tag-11 {
+  color: rgb(61, 136, 221);
+  border: 1px solid rgb(61, 136, 221);
+}
+
+.require-list .tag-12 {
+  color: rgb(61, 184, 221);
+  border: 1px solid rgb(61, 184, 221);
+}
+
+.require-list .tag-13 {
+  color: rgb(61, 221, 213);
+  border: 1px solid rgb(61, 221, 213);
+}
+
+.require-list .tag-14 {
+  color: rgb(61, 221, 160);
+  border: 1px solid rgb(61, 221, 160);
+}
+
+.require-list .tag-15 {
+  color: rgb(146, 221, 61);
+  border: 1px solid rgb(146, 221, 61);
+}

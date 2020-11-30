@@ -4,7 +4,7 @@ interface ITypeItem {
 }
 
 export interface List {
-  mchId?: string;
+  mchId: number;
   mchName: string;
   createTime?: number;
   creator?: string;

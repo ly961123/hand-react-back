@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Spin } from 'antd';
+import Spins from '@rootDir/client/component/Spins';
 import { IMerchantData, List } from '@rootDir/model/merchant';
 import apiClient from '../../apiClient';
-import MerchantFrom from '../component/from';
+import MerchantFrom from '../component/form';
 
 export default function EditMerchant({
   history,
@@ -28,7 +28,7 @@ export default function EditMerchant({
     }
   }, [merchantId]);
 
-  return <Spin spinning={loading}>
+  return <Spins spinning={loading}>
     <MerchantFrom history={history} merchant={tempMerchant} />
-  </Spin>;
+  </Spins>;
 }
