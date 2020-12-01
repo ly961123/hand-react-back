@@ -17,18 +17,18 @@ import {
 import { RouteComponentProps } from 'react-router-dom';
 import CardLayout from '../../../component/layout/CardLayout';
 import CardHeader from '../../../component/layout/CardHeader';
+import BraftEditor from '../../../component/BraftEditor';
 import { IMerchantList } from '@rootDir/model/merchant';
 import { List } from '@rootDir/model/requirement';
 import apiClient from '@rootDir/client/apiClient';
 import Spins from '@rootDir/client/component/Spins';
 import moment from 'moment';
+import DescriptionJson from './description.json';
 import './index.scss';
 
 type IProps = {
   requirement?: List,
 } & Pick<RouteComponentProps, 'history'>;
-
-const { TextArea } = Input;
 
 const aDayMS = 60 * 60 * 24 * 1000;
 
@@ -46,7 +46,7 @@ const defaultForm = {
   amount: '',
   unit: '',
   expectedDeliveryDate: new Date().getTime(),
-  description: '',
+  description: JSON.stringify(DescriptionJson['bf']),
   linkman: '',
   phoneNum: '',
 };
@@ -113,9 +113,18 @@ const RequirementFrom = memo(({
     form
       .validateFields()
       .then(values => {
+        const braftDesciption = typeof(values.description) === 'string' ? values.description : values.description.toRAW();
         // fetch(values);
+        const descriptionLength = braftDesciption
+          && JSON.parse(braftDesciption).blocks.reduce((acc: number, cur: any) =>
+            acc + cur.text.length, 0);
         console.log(fetch);
-        console.log(values);
+        console.log(descriptionLength, 'descriptionLength');
+        console.log(braftDesciption, 999999999999);
+        console.log({
+          ...values,
+          description: braftDesciption,
+        });
       });
   }, [form]);
 
@@ -256,17 +265,30 @@ const RequirementFrom = memo(({
             </Col>
           </Form.Item>
           <Form.Item
-            label='商户说明'
+            label='需求描述'
             name='description'
-            rules={[{ required: true, message: '请输入商户说明!' }]}
+            rules={[
+              { required: true, message: '请输入需求描述!' },
+              {
+                validator(_, value) {
+                  const braftDesciption = typeof(value) === 'string' ? value : value.toRAW();
+                  // 最大不得超过10000个字
+                  const max = 10000;
+                  const descriptionLength = value && JSON.parse(braftDesciption).blocks.reduce(
+                    (acc: number, cur: any) => acc + cur.text.length, 0);
+                  if (descriptionLength >= max || descriptionLength === 0) {
+                    return Promise.reject('不能为空且不超过10000个字!');
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
           >
-            <Col span={12}>
-              <TextArea
-                rows={4}
-                allowClear
-                placeholder='请输入商户说明'
+            <Col span={24}>
+              <BraftEditor
                 value={formData.description}
-                onChange={e => setFormField('description', e.target.value)}
+                placeholder='不超过10000个字'
+                onChange={v => setFormField('description', v)}
               />
             </Col>
           </Form.Item>

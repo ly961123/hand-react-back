@@ -1,0 +1,8 @@
+.bf-container {
+  border: #e0e0e0 1px solid;
+  max-width: 1200px;
+}
+
+.bf-container.fullscreen {
+  max-width: none;
+}
