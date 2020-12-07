@@ -18,6 +18,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import CardLayout from '../../../component/layout/CardLayout';
 import CardHeader from '../../../component/layout/CardHeader';
 import BraftEditor from '../../../component/BraftEditor';
+import NameEditor from '../../../component/NameEditor';
 import { IMerchantList } from '@rootDir/model/merchant';
 import { List } from '@rootDir/model/requirement';
 import apiClient from '@rootDir/client/apiClient';
@@ -49,6 +50,7 @@ const defaultForm = {
   description: JSON.stringify(DescriptionJson['bf']),
   linkman: '',
   phoneNum: '',
+  pm: 'v_yonlai;musama;',
 };
 
 const RequirementFrom = memo(({
@@ -69,6 +71,7 @@ const RequirementFrom = memo(({
         description,
         linkman,
         phoneNum,
+        pm,
       } = requirement;
       const data = {
         rmeName,
@@ -77,6 +80,7 @@ const RequirementFrom = memo(({
         expectedDeliveryDate,
         description,
         linkman,
+        pm,
         phoneNum: String(phoneNum),
       }
       setFormData(data);
@@ -221,6 +225,18 @@ const RequirementFrom = memo(({
                 value={moment(formData.expectedDeliveryDate)}
                 disabledDate={handleDisabledDate}
                 onChange={e => setFormField('expectedDeliveryDate', e)}
+              />
+            </Col>
+          </Form.Item>
+          <Form.Item
+            label='PM'
+            name='pm'
+            rules={[{ required: true, message: '请输入pm!' }]}
+          >
+            <Col>
+              <NameEditor
+                value={formData.pm}
+                onChange={(value: string) => setFormField('pm', value)}
               />
             </Col>
           </Form.Item>

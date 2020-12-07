@@ -1,0 +1,32 @@
+.rtx-editor {
+  width: 420px;
+  .ant-input {
+    resize: none;
+    width: 420px;
+  }
+  
+  .ant-list-item {
+    height: 30px;
+  }
+  
+  .ant-list-item:hover {
+    background-color: #1890ff;
+    cursor: pointer;
+  }
+  
+  .name_editor_list {
+    position: absolute;
+    width: 420px;
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ant-select-item-option-active {
+    background-color: #1890ff78;
+  }
+
+}
+
