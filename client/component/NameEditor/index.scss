@@ -1,5 +1,6 @@
 .rtx-editor {
   .rtx-input {
+    position: relative;
     resize: none;
     width: 500px;
     height: 120px;
@@ -12,6 +13,32 @@
     border-radius: 2px;
     transition: all 0.3s;
     overflow-y: auto;
+    .clear {
+      z-index: 10;
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 14px;
+      height: 14px;
+      font-size: 13px;
+      text-align: center;
+      color: #fff;
+      background-color: #afafaf;
+      line-height: 12px;
+      border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+    .clear:hover {
+      background-color:#706e6e;
+      cursor: pointer;
+    }
+  }
+
+  .rtx-input:hover {
+    border-color: #1890ff;
   }
 
   .input-focus {

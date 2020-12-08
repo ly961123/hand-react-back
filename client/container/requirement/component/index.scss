@@ -1,4 +1,15 @@
+.complex-group {
+  position: relative;
+}
+
 .unit, .phoneNum {
+  position: absolute;
+  top: 0;
+  left: 30%;
+  width: 200px;
+}
+
+.phoneNum {
   position: absolute;
   top: 0;
   right: -100%;

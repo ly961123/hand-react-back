@@ -18,7 +18,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import CardLayout from '../../../component/layout/CardLayout';
 import CardHeader from '../../../component/layout/CardHeader';
 import BraftEditor from '../../../component/BraftEditor';
-import NameEditor from '../../../component/NameEditor';
+import NameEditor from '../../../component/NameEditor/index';
 import { IMerchantList } from '@rootDir/model/merchant';
 import { List } from '@rootDir/model/requirement';
 import apiClient from '@rootDir/client/apiClient';
@@ -173,49 +173,51 @@ const RequirementFrom = memo(({
               />
             </Col>
           </Form.Item>
-          <Form.Item
-            label='需求数据量'
-            name='amount'
-            rules={[
-              { required: true, message: '请输入需求数据量!' },
-              {
-                validator(_, value) {
-                  const sValue = String(value);
-                  if (!sValue || sValue.match(/^\+?[1-9]\d*$/)) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject('请输入正确格式的需求数据量!');
+          <div className='complex-group'>
+            <Form.Item
+              label='需求数据量'
+              name='amount'
+              rules={[
+                { required: true, message: '请输入需求数据量!' },
+                {
+                  validator(_, value) {
+                    const sValue = String(value);
+                    if (!sValue || sValue.match(/^\+?[1-9]\d*$/)) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject('请输入正确格式的需求数据量!');
+                  },
                 },
-              },
-            ]}
-          >
-            <Col span={4}>
-              <Input
-                allowClear
-                autoComplete='off'
-                placeholder='请输入需求数据量'
-                value={formData.amount}
-                onChange={e => setFormField('amount', e.target.value)}
-              />
-              <Form.Item
-                className='unit'
-                name='unit'
-                rules={[
-                  { required: true, message: '请输入单位!' },
-                ]}
-              >
-                <Col span={13}>
-                  <Input
-                    allowClear
-                    autoComplete='off'
-                    placeholder='数据单位'
-                    value={formData.unit}
-                    onChange={e => setFormField('unit', e.target.value)}
-                  />
-                </Col>
-              </Form.Item>
-            </Col>
-          </Form.Item>
+              ]}
+            >
+              <Col span={4}>
+                <Input
+                  allowClear
+                  autoComplete='off'
+                  placeholder='请输入需求数据量'
+                  value={formData.amount}
+                  onChange={e => setFormField('amount', e.target.value)}
+                />
+              </Col>
+            </Form.Item>
+            <Form.Item
+              className='unit'
+              name='unit'
+              rules={[
+                { required: true, message: '请输入单位!' },
+              ]}
+            >
+              <Col span={24}>
+                <Input
+                  allowClear
+                  autoComplete='off'
+                  placeholder='数据单位'
+                  value={formData.unit}
+                  onChange={e => setFormField('unit', e.target.value)}
+                />
+              </Col>
+            </Form.Item>
+          </div>
           <Form.Item
             label='预期交付'
             name='expectedDeliveryDate'
@@ -242,46 +244,48 @@ const RequirementFrom = memo(({
               />
             </Col>
           </Form.Item>
-          <Form.Item
-            label='联系人'
-            name='linkman'
-            rules={[{ required: true, message: '请输入联系人!' }]}
-          >
-            <Col span={4}>
-              <Input
-                allowClear
-                autoComplete='off'
-                placeholder='联系人'
-                value={formData.linkman}
-                onChange={e => setFormField('linkman', e.target.value)}
-              />
-              <Form.Item
-                className='phoneNum'
-                name='phoneNum'
-                rules={[
-                  { required: true, message: '请输入联系方式!' },
-                  {
-                    validator(_, value) {
-                      if (!value || value.match(/^\d{1,}$/)) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject('请输入正确格式的联系方式!');
-                    },
+          <div className='complex-group'>
+            <Form.Item
+              label='联系人'
+              name='linkman'
+              rules={[{ required: true, message: '请输入联系人!' }]}
+            >
+              <Col span={4}>
+                <Input
+                  allowClear
+                  autoComplete='off'
+                  placeholder='联系人'
+                  value={formData.linkman}
+                  onChange={e => setFormField('linkman', e.target.value)}
+                />
+              </Col>
+            </Form.Item>
+            <Form.Item
+              className='phoneNum'
+              name='phoneNum'
+              rules={[
+                { required: true, message: '请输入联系方式!' },
+                {
+                  validator(_, value) {
+                    if (!value || value.match(/^\d{1,}$/)) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject('请输入正确格式的联系方式!');
                   },
-                ]}
-              >
-                <Col span={24}>
-                  <Input
-                    allowClear
-                    autoComplete='off'
-                    placeholder='联系方式'
-                    value={formData.phoneNum}
-                    onChange={e => setFormField('phoneNum', e.target.value)}
-                  />
-                </Col>
-              </Form.Item>
-            </Col>
-          </Form.Item>
+                },
+              ]}
+            >
+              <Col span={24}>
+                <Input
+                  allowClear
+                  autoComplete='off'
+                  placeholder='联系方式'
+                  value={formData.phoneNum}
+                  onChange={e => setFormField('phoneNum', e.target.value)}
+                />
+              </Col>
+            </Form.Item>
+          </div>
           <Form.Item
             label='需求描述'
             name='description'

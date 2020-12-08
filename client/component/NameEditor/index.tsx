@@ -211,6 +211,7 @@ const NameEditor = ({
           value={inputText}
         />
         <span className='width_caculator'>{inputText}</span>
+        {userInput && <div className='clear' onClick={() => setUserInput('')}>x</div>}
       </div>
       <OutsideClickHandler
         onOutsideClick={() => {
