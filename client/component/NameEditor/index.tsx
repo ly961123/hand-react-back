@@ -212,6 +212,7 @@ const NameEditor = ({
         />
         <span className='width_caculator'>{inputText}</span>
         {userInput && <div className='clear' onClick={() => setUserInput('')}>x</div>}
+        {!inputText && <div className='placeholder'>请输入企业微信账号,复制多个用;隔开</div>}
       </div>
       <OutsideClickHandler
         onOutsideClick={() => {

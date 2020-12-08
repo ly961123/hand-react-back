@@ -35,6 +35,12 @@
       background-color:#706e6e;
       cursor: pointer;
     }
+    .placeholder {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      color: #bfbfbf;
+    }
   }
 
   .rtx-input:hover {
