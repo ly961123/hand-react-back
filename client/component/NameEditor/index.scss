@@ -43,6 +43,11 @@
     }
   }
 
+  .rtx-input-disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
+
   .rtx-input:hover {
     border-color: #1890ff;
   }
@@ -96,6 +101,11 @@
       -moz-border-radius: 3px;
       -ms-border-radius: 3px;
       -o-border-radius: 3px;
+  }
+
+  .particle-disabled {
+    background-color: #fff;
+    cursor: not-allowed;
   }
 
   &__delete {

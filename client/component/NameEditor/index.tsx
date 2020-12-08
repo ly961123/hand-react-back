@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useCallback, useRef, KeyboardEvent } from 'react';
+import React, { useEffect, useState, useCallback, useRef, KeyboardEvent, ReactNode } from 'react';
 import { message } from 'antd';
 import OutsideClickHandler from 'react-outside-click-handler';
 import './index.scss';
 
 type IProps = {
   value: string,
+  disabled?: boolean,
   onChange: (value: string) => void;
 };
 
@@ -25,10 +26,10 @@ const fetchRtxUsers = () => new Promise((resolve, reject) => {
     resolve(arrusers);
   }
 });
-const defaultCN = 'rtx-granule';
 
 const NameEditor = ({
   value,
+  disabled,
   onChange,
 }: IProps) => {
   const textElement = useRef(null);
@@ -38,9 +39,8 @@ const NameEditor = ({
   const [rtxOptionsVisible, setRtxOptionsVisible] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [userInput, setUserInput] = useState('');
-
   const [inputText, setInputText] = useState('');
-  const [isPitch, setIsPitch] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const setFullName = useCallback((name: string) => {
     const list = splitRtxString(name);
@@ -89,7 +89,7 @@ const NameEditor = ({
 
   // 获取焦点
   const rtxFocus = () => {
-    setIsPitch(true);
+    setIsFocus(true);
     (inputElement.current as any).focus();
   };
 
@@ -107,7 +107,7 @@ const NameEditor = ({
     onChange(rtxValue.replace(BRACKET_REG, ''));
     console.log(rtxValue.replace(BRACKET_REG, ''), '提交的');
     setInputText('');
-    setIsPitch(false);
+    setIsFocus(false);
   };
 
   const rtxNamesUpdate = useCallback((name: string) => {
@@ -186,24 +186,28 @@ const NameEditor = ({
     ele.style.width = `${caculator.offsetWidth}px`;
   }, [inputText]);
 
+  const inputEle: ReactNode = userInput.split(';').filter(name => name).map((v, i) =>
+    <span key={`text-${i}`} className={`rtx-editor__particle ${disabled && 'particle-disabled'}`} contentEditable={false}>
+      <span>{v}</span>
+      {!disabled && <span data-ix={i} className='rtx-editor__delete' onClick={deleteParticle}>x</span>}
+    </span>);
+  const deleteEle: ReactNode = userInput && !disabled && <div className='clear' onClick={() => setUserInput('')}>x</div>;
+  const placeholderEle: ReactNode = !inputText && !userInput && <div className='placeholder'>请输入企业微信账号,复制多个用;隔开</div>;
+
   return (
     <div className='rtx-editor'>
       <div
-        className={!isPitch ? 'rtx-input' : 'rtx-input input-focus'}
-        contentEditable={true}
+        className={`rtx-input ${disabled ? 'rtx-input-disabled' : (isFocus ? 'input-focus' : '')}`}
+        contentEditable={!disabled}
         suppressContentEditableWarning={true}
         ref={textElement}
         onFocus={rtxFocus}
       >
-        {
-          userInput.split(';').filter(name => name).map((v, i) => <span key={`text-${i}`} className='rtx-editor__particle' contentEditable={false}>
-            <span>{v}</span>
-            <span data-ix={i} className='rtx-editor__delete' onClick={deleteParticle}>x</span>
-          </span>)
-        }
+        {inputEle}
         {/* 设置input自适应宽度 */}
         <input
           className='rtx-editor__input'
+          style={{backgroundColor: disabled ? '#f5f5f5' : ''}}
           ref={inputElement}
           onChange={rtxChange}
           onKeyDown={onInputKeyPress}
@@ -211,8 +215,8 @@ const NameEditor = ({
           value={inputText}
         />
         <span className='width_caculator'>{inputText}</span>
-        {userInput && <div className='clear' onClick={() => setUserInput('')}>x</div>}
-        {!inputText && <div className='placeholder'>请输入企业微信账号,复制多个用;隔开</div>}
+        {deleteEle}
+        {placeholderEle}
       </div>
       <OutsideClickHandler
         onOutsideClick={() => {
@@ -223,7 +227,7 @@ const NameEditor = ({
           {
             rtxOptions.map((v, i) =>
               <div
-                className={selectedIndex !== i ? defaultCN : `${defaultCN} rtx-granule-active`}
+                className={`rtx-granule ${selectedIndex === i ? 'rtx-granule-active' : ''}`}
                 onClick={onRtxItemClick}
                 key={i}>{v}</div>
             )
