@@ -29,6 +29,7 @@ import './index.scss';
 
 type IProps = {
   requirement?: List,
+  requireId?: string,
 } & Pick<RouteComponentProps, 'history'>;
 
 const aDayMS = 60 * 60 * 24 * 1000;
@@ -50,18 +51,24 @@ const defaultForm = {
   description: JSON.stringify(DescriptionJson['bf']),
   linkman: '',
   phoneNum: '',
-  pm: 'v_yonlai;musama;',
+  pm: '',
 };
 
 const RequirementFrom = memo(({
   history,
   requirement,
+  requireId,
 }: IProps) => {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+    if (!requireId) {
+      setLoading(false);
+      return;
+    }
     if (requirement && Object.keys(requirement).length > 0) {
       const {
         rmeName,
@@ -85,8 +92,9 @@ const RequirementFrom = memo(({
       }
       setFormData(data);
       form.setFieldsValue(data);
+      setLoading(false);
     }
-  }, [form, requirement]);
+  }, [form, requireId, requirement]);
 
   const fetchData = async (url: string, values: List) => {
     const result: IMerchantList = await apiClient.post(url, values);
@@ -105,7 +113,7 @@ const RequirementFrom = memo(({
     setLoading(true);
     fetchData(url, values).then(() => {
       setLoading(false);
-      history.replace('/merchants');
+      history.replace('/requirements');
       message.success(`${tip}成功`);
     }).catch(() => {
       setLoading(false);
@@ -118,14 +126,7 @@ const RequirementFrom = memo(({
       .validateFields()
       .then(values => {
         const braftDesciption = typeof(values.description) === 'string' ? values.description : values.description.toRAW();
-        // fetch(values);
-        const descriptionLength = braftDesciption
-          && JSON.parse(braftDesciption).blocks.reduce((acc: number, cur: any) =>
-            acc + cur.text.length, 0);
-        console.log(fetch);
-        console.log(descriptionLength, 'descriptionLength');
-        console.log(braftDesciption, 999999999999);
-        console.log({
+        fetch({
           ...values,
           description: braftDesciption,
         });
@@ -179,7 +180,8 @@ const RequirementFrom = memo(({
               { required: true, message: '请输入需求数据量!' },
               {
                 validator(_, value) {
-                  if (!value || value.match(/^\+?[1-9]\d*$/)) {
+                  const sValue = String(value);
+                  if (!sValue || sValue.match(/^\+?[1-9]\d*$/)) {
                     return Promise.resolve();
                   }
                   return Promise.reject('请输入正确格式的需求数据量!');

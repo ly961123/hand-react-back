@@ -1,5 +1,7 @@
 import Mock from 'mockjs';
 
+const aDayMS = 60 * 60 * 24 * 1000;
+
 export const merchantList = (num: number) => {
   const name = `merchants|${num}`
   const merchantList = Mock.mock({
@@ -7,7 +9,7 @@ export const merchantList = (num: number) => {
       {
         'mchId|+1': 2,
         'mchName|1': ['测试', '45646541654', '7788', '哈哈哈'],
-        'createTime|1': [1599782400000, 1599900950000, 1600246550000],
+        'createTime|1': [new Date().getTime() + aDayMS, new Date().getTime() + (aDayMS * 2), new Date().getTime() + (aDayMS * 4)],
         'creator|1': ['永', '嘻嘻嘻哈哈哈', 'is me'],
         'mchType|1': [0, 1, 2, 3, 4, 5],
         'channel|1': [1, 2, 3, 4, 5, 6],

@@ -27,6 +27,11 @@ export interface IRequirement {
   data: RequirementData,
 }
 
+export interface IList {
+  msg: string,
+  data: List,
+}
+
 export interface RequirementData {
   requirement: List[],
   count: number,

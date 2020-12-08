@@ -178,11 +178,14 @@ const Shop = memo(({ match, history }: RouteComponentProps) => {
     },
     {
       title: '操作',
-      dataIndex: 'mchId',
-      key: 'mchId',
-      render(mchId: number): ReactNode {
+      dataIndex: 'rmeId',
+      key: 'rmeId',
+      render(rmeId: number): ReactNode {
         return <div>
-          <a data-mchid={mchId}>编辑</a>
+          <a data-rmeId={rmeId} onClick={() => {
+            // eslint-disable-next-line react/prop-types
+            history.push(`requirements/${rmeId}/edit`)
+          }}>编辑</a>
         </div>;
       },
     },
