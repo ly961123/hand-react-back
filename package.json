@@ -27,7 +27,7 @@
     "@hot-loader/react-dom": "^16.13.0",
     "@types/cheerio": "^0.22.21",
     "antd": "^4.8.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "better-scroll": "^2.0.2",
     "braft-editor": "^2.3.9",
